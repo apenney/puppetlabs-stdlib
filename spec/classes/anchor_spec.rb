@@ -1,5 +1,4 @@
-require 'puppet'
-require 'rspec-puppet'
+require 'spec_helper'
 
 describe "anchorrefresh" do
   let(:node) { 'testhost.example.com' }
