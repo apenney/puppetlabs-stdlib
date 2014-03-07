@@ -18,14 +18,24 @@ module PuppetSpec::Compiler
     graph
   end
 
-  def apply_compiled_manifest(manifest, prioritizer = Puppet::Graph::SequentialPrioritizer.new)
-    transaction = Puppet::Transaction.new(compile_to_ral(manifest),
-                                         Puppet::Transaction::Report.new("apply"),
-                                         prioritizer)
-    transaction.evaluate
-    transaction.report.finalize_report
+  if Puppet.version.to_f >= 3.3
+    def apply_compiled_manifest(manifest, prioritizer = Puppet::Graph::SequentialPrioritizer.new)
+      transaction = Puppet::Transaction.new(compile_to_ral(manifest),
+                                          Puppet::Transaction::Report.new("apply"),
+                                          prioritizer)
+      transaction.evaluate
+      transaction.report.finalize_report
 
-    transaction
+      transaction
+    end
+  else
+    def apply_compiled_manifest(manifest)
+      transaction = Puppet::Transaction.new(compile_to_ral(manifest), Puppet::Transaction::Report.new("apply"))
+      transaction.evaluate
+      transaction.report.finalize_report
+
+      transaction
+    end
   end
 
   def order_resources_traversed_in(relationships)
