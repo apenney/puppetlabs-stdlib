@@ -5,7 +5,7 @@ require 'puppet_spec/compiler'
 describe 'getparam' do
   include PuppetSpec::Compiler
 
-  before :all do
+  before :each do
     Puppet::Parser::Functions.autoloader.loadall
     Puppet::Parser::Functions.function(:getparam)
   end

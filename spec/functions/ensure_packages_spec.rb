@@ -7,7 +7,7 @@ require 'puppet_spec/compiler'
 describe 'ensure_packages' do
   include PuppetSpec::Compiler
 
-  before :all do
+  before :each do
     Puppet::Parser::Functions.autoloader.loadall
     Puppet::Parser::Functions.function(:ensure_packages)
   end
