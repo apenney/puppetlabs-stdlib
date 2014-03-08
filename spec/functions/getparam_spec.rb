@@ -28,11 +28,11 @@ describe 'getparam' do
   end
 
   describe 'when a resource is not specified' do
-    it { expect { scope.function_getparam() }.to raise_error }
-    it { expect { scope.function_getparam('User[dan]') }.to raise_error }
-    it { expect { scope.function_getparam('User[dan]') }.to raise_error }
-    it { expect { scope.function_getparam('User[dan]', {}) }.to raise_error }
-    it { expect { scope.function_getparam('User[dan]', '') }.to raise_error }
+    it { expect { scope.function_getparam([]) }.to raise_error }
+    it { expect { scope.function_getparam(['User[dan]']) }.to raise_error }
+    it { expect { scope.function_getparam(['User[dan]']) }.to raise_error }
+    it { expect { scope.function_getparam(['User[dan]', {}]) }.to raise_error }
+    it { expect { scope.function_getparam(['User[dan]', '']) }.to raise_error }
   end
 
   describe 'when compared against a resource with no params' do
