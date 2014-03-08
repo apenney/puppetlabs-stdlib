@@ -14,16 +14,7 @@ describe 'ensure_packages' do
 
   let :node     do Puppet::Node.new('localhost') end
   let :compiler do Puppet::Parser::Compiler.new(node) end
-  let :scope    do
-    if Puppet.version.to_f >= 3.0
-      Puppet::Parser::Scope.new(compiler)
-    else
-      newscope = Puppet::Parser::Scope.new
-      newscope.compiler = compiler
-      newscope.source   = Puppet::Resource::Type.new(:node, :localhost)
-      newscope
-    end
-  end
+  let :scope    do compiler.topscope end
 
   describe 'argument handling' do
     it 'fails with no arguments' do

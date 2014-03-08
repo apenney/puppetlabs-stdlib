@@ -12,7 +12,7 @@ describe 'ensure_resource' do
 
   let :node     do Puppet::Node.new('localhost') end
   let :compiler do Puppet::Parser::Compiler.new(node) end
-  let :scope    do Puppet::Parser::Scope.new(compiler) end
+  let :scope    do compiler.topscope end
 
   describe 'when a type or title is not specified' do
     it { expect { scope.function_ensure_resource([]) }.to raise_error }

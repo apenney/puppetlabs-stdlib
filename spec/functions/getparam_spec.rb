@@ -12,16 +12,7 @@ describe 'getparam' do
 
   let :node     do Puppet::Node.new('localhost') end
   let :compiler do Puppet::Parser::Compiler.new(node) end
-  if Puppet.version.to_f >= 3.0
-    let :scope    do Puppet::Parser::Scope.new(compiler) end
-  else
-    let :scope    do
-      newscope = Puppet::Parser::Scope.new
-      newscope.compiler = compiler
-      newscope.source   = Puppet::Resource::Type.new(:node, :localhost)
-      newscope
-    end
-  end
+  let :scope    do compiler.topscope end
 
   it "should exist" do
     Puppet::Parser::Functions.function("getparam").should == "function_getparam"
