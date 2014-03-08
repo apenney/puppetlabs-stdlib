@@ -14,10 +14,10 @@ describe 'ensure_packages' do
 
   let :node     do Puppet::Node.new('localhost') end
   let :compiler do Puppet::Parser::Compiler.new(node) end
-  if Puppet.version.to_f >= 3.0
-    let :scope    do Puppet::Parser::Scope.new(compiler) end
-  else
-    let :scope    do
+  let :scope    do
+    if Puppet.version.to_f >= 3.0
+      Puppet::Parser::Scope.new(compiler)
+    else
       newscope = Puppet::Parser::Scope.new
       newscope.compiler = compiler
       newscope.source   = Puppet::Resource::Type.new(:node, :localhost)

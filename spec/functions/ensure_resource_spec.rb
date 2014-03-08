@@ -15,7 +15,7 @@ describe 'ensure_resource' do
   let :scope    do Puppet::Parser::Scope.new(compiler) end
 
   describe 'when a type or title is not specified' do
-    it { expect { scope.function_ensure_resource }.to raise_error }
+    it { expect { scope.function_ensure_resource([]) }.to raise_error }
     it { expect { scope.function_ensure_resource(['type']) }.to raise_error }
   end
 
